@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Blades Between Turns łączy strategię turową z pojedynkami w czasie rzeczywistym. Zobacz rozgrywkę, cykl światła, figury i trzy próby.">
+  <meta name="description" content="Blades Between Turns łączy strategię turową z pojedynkami w czasie rzeczywistym. Pobierz grę na Windows i poznaj figury, areny i próby.">
   <meta name="theme-color" content="#101116">
   <title>Blades Between Turns</title>
   <link rel="icon" href="assets/blades-between-turns.png" type="image/png">
@@ -22,6 +22,7 @@
         <a href="#blades-cycle">Cykl światła</a>
         <a href="#blades-roster">Bestiariusz</a>
         <a href="#blades-trials">Próby</a>
+        <a href="#blades-download">Pobierz</a>
       </nav>
     </div>
   </header>
@@ -41,8 +42,9 @@
           </h1>
           <p class="hero__lead">Atakujesz figurę na planszy. W następnej chwili jesteś na arenie i walczysz o to samo pole w czasie rzeczywistym.</p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#blades-gameplay">Zobacz rozgrywkę</a>
-            <a class="button button--outline" href="#blades-roster">Poznaj figury</a>
+            <a class="download-link" href="#blades-download">Pobierz grę</a>
+            <a class="text-action" href="#blades-gameplay">Zobacz rozgrywkę</a>
+            <a class="text-action" href="#blades-roster">Poznaj figury</a>
           </div>
           <ul class="hero__modes" aria-label="Platforma i tryby gry">
             <li>Windows</li>
@@ -454,6 +456,22 @@
             </figure>
           </div>
         </div>
+      </div>
+    </section>
+    <section id="blades-download" class="section download" aria-labelledby="blades-download-title">
+      <img class="download__art" src="assets/installer-gate.png" alt="" aria-hidden="true"
+           width="1672" height="941" loading="lazy" decoding="async">
+      <div class="shell download__inner">
+        <h2 id="blades-download-title">Pobierz grę</h2>
+        <p class="download__copy">Otwórz bramę w pełnoekranowym instalatorze. Jeden plik zawiera całą grę i dodaje ją do menu Start.</p>
+        <a class="download-link" id="windows-installer"
+           href="https://github.com/zeichmann/archon-www/releases/download/windows-0.1.0-preview.1/BladesBetweenTurns-Setup-Windows-x64.exe">
+          Pobierz instalator Windows
+        </a>
+        <p class="download__requirements">Windows 10 22H2 lub Windows 11 (x64) · EXE · 914 MiB</p>
+        <p class="download__requirements">Wersja 0.1.0-preview.1 · 2,16 GiB po instalacji</p>
+        <a class="download__checksum"
+           href="https://github.com/zeichmann/archon-www/releases/download/windows-0.1.0-preview.1/BladesBetweenTurns-Setup-Windows-x64.exe.sha256">Suma kontrolna SHA-256</a>
       </div>
     </section>
   </main>

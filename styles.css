@@ -278,44 +278,6 @@ h2 {
   margin-block: 1.75rem 1.3rem;
 }
 
-.button {
-  display: inline-flex;
-  min-height: 2.9rem;
-  align-items: center;
-  justify-content: center;
-  padding: .55rem 1.15rem;
-  border: 1px solid transparent;
-  border-radius: .16rem;
-  font: 600 .89rem/1.35 var(--inscription);
-  transition: background-color .2s ease, border-color .2s ease, color .2s ease;
-  text-align: center;
-}
-
-.button--primary {
-  color: var(--gold-ink);
-  background: linear-gradient(180deg, #dbc49b, #bca071);
-  border-color: #e0c595;
-  box-shadow: inset 0 0 0 2px #553c2935;
-}
-
-.button--primary:hover {
-  background: #e1cba1;
-  border-color: #ebd6b0;
-}
-
-.button--outline {
-  color: var(--paper);
-  background: #131e2cde;
-  border-color: var(--border-accent);
-  box-shadow: inset 0 0 0 2px #b6985d25;
-}
-
-.button--outline:hover {
-  color: var(--gold);
-  background: #243647;
-  border-color: var(--gold);
-}
-
 .hero__modes {
   display: flex;
   flex-wrap: wrap;
@@ -1047,6 +1009,87 @@ h2 {
   transform: rotate(45deg);
 }
 
+.download {
+  position: relative;
+  display: grid;
+  align-items: center;
+  isolation: isolate;
+  min-height: clamp(28rem, 50vw, 42rem);
+  overflow: hidden;
+  background: #1b120d;
+}
+
+.download__art {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% center;
+}
+
+.download::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, #140e0bed 0%, #140e0bc0 45%, #140e0b18 83%),
+              linear-gradient(0deg, #100d0bba, transparent 48%);
+  content: "";
+}
+
+.download__inner h2 { color: var(--paper); }
+
+.download__copy {
+  max-width: 40ch;
+  margin-block: 1.2rem 1.7rem;
+  color: var(--paper);
+}
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .7em;
+  min-height: 2.8rem;
+  padding-block: .45em;
+  color: #ffda99;
+  border-bottom: 1px solid #b58c51;
+  font: 600 clamp(1.1rem, 2.2vw, 1.38rem)/1.3 var(--type);
+  text-decoration: none;
+}
+
+.download-link::before {
+  width: .42em;
+  height: .42em;
+  flex: none;
+  background: currentColor;
+  content: "";
+  transform: rotate(45deg);
+}
+
+.download-link:hover, .download-link:focus-visible {
+  color: #ffefc6;
+  border-color: currentColor;
+}
+
+.hero__actions > .text-action { margin-inline-start: .35em; }
+
+.download__requirements, .download__checksum {
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.download__requirements { margin-block: .32rem; }
+.download-link + .download__requirements { margin-top: .95rem; }
+.download__checksum { display: inline-block; margin-top: .7rem; text-underline-offset: .2em; }
+
+@media (max-width: 700px) {
+  .download::before {
+    background: linear-gradient(90deg, #140e0bf0, #140e0b9f 85%),
+                linear-gradient(0deg, #100d0bc0, transparent 40%);
+  }
+}
+
 .footer {
   background: #111117;
 }
@@ -1252,10 +1295,6 @@ h2 {
 
   .hero__actions {
     margin-block: 1.2rem .95rem;
-  }
-
-  .hero__actions .button {
-    padding-inline: .85rem;
   }
 
   .game-facts {
