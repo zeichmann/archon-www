@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Blades Between Turns łączy strategię turową z pojedynkami w czasie rzeczywistym. Zobacz rozgrywkę, cykl światła, figury i trzy próby.">
+  <meta name="theme-color" content="#101116">
+  <title>Blades Between Turns</title>
+  <link rel="icon" href="assets/blades-between-turns.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body id="blades-landing">
+  <a class="skip-link" href="#blades-main">Przejdź do treści</a>
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="site-brand" href="#blades-landing">
+        <img src="assets/blades-between-turns.png" alt="Blades Between Turns" width="238" height="85">
+      </a>
+      <nav class="site-nav" aria-label="Nawigacja strony gry">
+        <a href="#blades-gameplay">Rozgrywka</a>
+        <a href="#blades-cycle">Cykl światła</a>
+        <a href="#blades-roster">Bestiariusz</a>
+        <a href="#blades-trials">Próby</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="blades-main" tabindex="-1">
+    <section class="hero" aria-labelledby="blades-title">
+      <picture class="hero__art">
+        <source media="(max-width: 700px)" srcset="assets/hero-walkiria-smok-mobile.jpg" width="900" height="738">
+        <img src="assets/hero-walkiria-smok.jpg" fetchpriority="high" width="1672" height="941" alt="Walkiria z włócznią staje naprzeciw błękitnego Smoka na kamiennej planszy Miedzianego Mostu">
+      </picture>
+      <div class="shell hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow hero__eyebrow">Strategia turowa <span aria-hidden="true">/</span> Pojedynki w czasie rzeczywistym</p>
+          <h1 id="blades-title">
+            <span>Blades</span>
+            <span class="hero__rest-of-title">Between Turns</span>
+          </h1>
+          <p class="hero__lead">Atakujesz figurę na planszy. W następnej chwili jesteś na arenie i walczysz o to samo pole w czasie rzeczywistym.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#blades-gameplay">Zobacz rozgrywkę</a>
+            <a class="button button--outline" href="#blades-roster">Poznaj figury</a>
+          </div>
+          <ul class="hero__modes" aria-label="Platforma i tryby gry">
+            <li>Windows</li>
+            <li>Solo lub lokalnie we dwoje</li>
+          </ul>
+        </div>
+      </div>
+      <p class="hero__credit">Miedziany Most <span aria-hidden="true">·</span> Ilustracja promocyjna</p>
+    </section>
+
+    <section id="blades-gameplay" class="section gameplay" aria-labelledby="blades-gameplay-title">
+      <div class="shell">
+        <div class="section-heading section-heading--split">
+          <div>
+            <p class="eyebrow">Rozgrywka</p>
+            <h2 id="blades-gameplay-title">Z planszy na arenę</h2>
+          </div>
+          <p>Atak na wrogą figurę przenosi walkę na arenę. Przejmujesz tam sterowanie i walczysz o zajęte pole.</p>
+        </div>
+
+        <div class="game-demo" data-switch="scene">
+          <div class="game-demo__bar">
+            <div class="text-tabs scene-tabs" role="tablist" aria-label="Ujęcia z gry">
+              <button id="blades-tab-3d" type="button" role="tab" data-choice="3d" aria-controls="blades-scene-3d" aria-selected="true">Plansza 3D</button>
+              <button id="blades-tab-2d" type="button" role="tab" data-choice="2d" aria-controls="blades-scene-2d" aria-selected="false" tabindex="-1">Plansza 2D</button>
+              <button id="blades-tab-duel" type="button" role="tab" data-choice="duel" aria-controls="blades-scene-duel" aria-selected="false" tabindex="-1">Arena</button>
+            </div>
+            <button class="text-action" type="button" data-zoom aria-label="Powiększ kadr">Powiększ</button>
+          </div>
+
+          <article id="blades-scene-3d" class="game-scene" data-panel="3d" role="tabpanel" aria-labelledby="blades-tab-3d" tabindex="0">
+            <img class="game-scene__image" src="assets/plansza-3d.jpg" loading="lazy" decoding="async" width="846" height="368" alt="Rycerz na trójwymiarowej planszy z zaznaczonymi dozwolonymi polami ruchu">
+            <div class="game-scene__copy">
+              <p class="eyebrow">Ruch turowy</p>
+              <h3>Wybierz pole</h3>
+              <p>Zielone znaczniki pokazują, dokąd możesz ruszyć. Pole zajęte przez rywala może stać się miejscem pojedynku.</p>
+              <button class="text-action" type="button" data-jump="duel">Otwórz arenę</button>
+            </div>
+          </article>
+
+          <article id="blades-scene-2d" class="game-scene" data-panel="2d" role="tabpanel" aria-labelledby="blades-tab-2d" tabindex="0" hidden>
+            <img class="game-scene__image" src="assets/plansza-2d.jpg" loading="lazy" decoding="async" width="846" height="368" alt="Ta sama pozycja Rycerza na płaskiej planszy widzianej z góry">
+            <div class="game-scene__copy">
+              <p class="eyebrow">Ruch turowy</p>
+              <h3>Spójrz z góry</h3>
+              <p>Widok 2D pokazuje tę samą turę. W grze możesz zmieniać perspektywę w trakcie partii.</p>
+              <button class="text-action" type="button" data-jump="duel">Otwórz arenę</button>
+            </div>
+          </article>
+
+          <article id="blades-scene-duel" class="game-scene" data-panel="duel" role="tabpanel" aria-labelledby="blades-tab-duel" tabindex="0" hidden>
+            <img class="game-scene__image" src="assets/pojedynek.jpg" loading="lazy" decoding="async" width="846" height="368" alt="Walkiria i Mantykora walczą między kryształami na kamiennej arenie">
+            <div class="game-scene__copy">
+              <p class="eyebrow">Czas rzeczywisty</p>
+              <h3>Rozstrzygnij starcie</h3>
+              <p>Wykorzystuj kryształy jako osłonę i reaguj na zamachy rywala. Wynik pojedynku rozstrzyga, która figura zostaje na polu.</p>
+              <button class="text-action" type="button" data-jump="board">Wróć na planszę</button>
+            </div>
+          </article>
+        </div>
+
+        <ul class="game-facts" aria-label="Plansza i zasady gry">
+          <li>Plansza <strong>9 × 9</strong></li>
+          <li><strong>36</strong> figur na starcie</li>
+          <li><strong>5</strong> punktów mocy</li>
+          <li><strong>7</strong> czarów</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="blades-cycle" class="section cycle" data-phase="dawn" aria-labelledby="blades-cycle-title">
+      <div class="shell cycle__inner">
+        <div class="cycle__copy">
+          <p class="eyebrow">Cykl światła</p>
+          <h2 id="blades-cycle-title">To samo pole, inna przewaga</h2>
+          <p>W trakcie partii 31 pól zmienia jasność. Na jasnym polu Światłość zaczyna pojedynek z większą premią do zdrowia. Ciemność zyskuje na polach ciemnych.</p>
+          <div class="phase-picker" role="group" aria-label="Pora dnia">
+            <button type="button" data-phase-choice="dawn" aria-controls="blades-light-board" aria-pressed="true">Świt</button>
+            <button type="button" data-phase-choice="day" aria-controls="blades-light-board" aria-pressed="false">Dzień</button>
+            <button type="button" data-phase-choice="dusk" aria-controls="blades-light-board" aria-pressed="false">Zmierzch</button>
+            <button type="button" data-phase-choice="night" aria-controls="blades-light-board" aria-pressed="false">Noc</button>
+          </div>
+          <p class="phase-status" aria-live="polite">Świt · Zmienne pola stopniowo się rozjaśniają.</p>
+        </div>
+
+        <figure class="cycle-visual">
+          <div class="cycle-dial">
+            <div class="cycle-dial__rings" aria-hidden="true"></div>
+            <div id="blades-light-board" class="tactical-board" data-board role="img" aria-label="Układ 81 pól planszy z pięcioma punktami mocy o świcie">
+              <div class="tactical-board__axis tactical-board__axis--files" data-axis="files" aria-hidden="true"></div>
+              <div class="tactical-board__axis tactical-board__axis--ranks" data-axis="ranks" aria-hidden="true"></div>
+              <div class="tactical-board__grid" data-cells aria-hidden="true"></div>
+            </div>
+          </div>
+          <figcaption class="map-key">
+            <span><i class="map-key__power" aria-hidden="true"></i>Punkt mocy</span>
+            <span><i class="map-key__shift" aria-hidden="true"></i>Pole zmienne</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="blades-roster" class="section roster" aria-labelledby="blades-roster-title">
+      <div class="shell">
+        <div class="section-heading section-heading--split">
+          <h2 id="blades-roster-title">Bestiariusz</h2>
+          <p>16 figur Światłości i Ciemności oraz cztery przyzywane żywiołaki.</p>
+        </div>
+
+        <div class="roster-deck" data-switch="unit">
+          <div class="roster-strip">
+            <button class="roster-step roster-step--back" type="button" data-roster-step="-1" aria-label="Poprzednia postać" aria-controls="blades-roster-track"></button>
+            <div id="blades-roster-track" class="roster-tabs" role="tablist" aria-label="Postacie">
+              <button id="blades-tab-valkyrie" type="button" role="tab" data-side="light" aria-controls="blades-unit-valkyrie" aria-selected="true">
+                <img src="assets/walkiria.jpg" loading="lazy" decoding="async" width="440" height="440" alt="">
+                <span>Walkiria</span>
+              </button>
+              <button id="blades-tab-knight" type="button" role="tab" data-side="light" aria-controls="blades-unit-knight" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/light-knight.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Rycerz</span>
+              </button>
+              <button id="blades-tab-archer" type="button" role="tab" data-side="light" aria-controls="blades-unit-archer" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/light-archer.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Łuczniczka</span>
+              </button>
+              <button id="blades-tab-wizard" type="button" role="tab" data-side="light" aria-controls="blades-unit-wizard" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/light-wizard.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Czarodziej</span>
+              </button>
+              <button id="blades-tab-golem" type="button" role="tab" data-side="light" aria-controls="blades-unit-golem" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/light-golem.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Golem</span>
+              </button>
+              <button id="blades-tab-unicorn" type="button" role="tab" data-side="light" aria-controls="blades-unit-unicorn" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/light-unicorn.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Jednorożec</span>
+              </button>
+              <button id="blades-tab-djinni" type="button" role="tab" data-side="light" aria-controls="blades-unit-djinni" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/light-djinni.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Dżinn</span>
+              </button>
+              <button id="blades-tab-phoenix" type="button" role="tab" data-side="light" aria-controls="blades-unit-phoenix" aria-selected="false" tabindex="-1">
+                <img src="assets/feniks.jpg" loading="lazy" decoding="async" width="440" height="440" alt="">
+                <span>Feniks</span>
+              </button>
+              <button id="blades-tab-sorceress" type="button" role="tab" data-side="dark" aria-controls="blades-unit-sorceress" aria-selected="false" tabindex="-1">
+                <img src="assets/czarodziejka.jpg" loading="lazy" decoding="async" width="440" height="440" alt="">
+                <span>Czarodziejka</span>
+              </button>
+              <button id="blades-tab-dragon" type="button" role="tab" data-side="dark" aria-controls="blades-unit-dragon" aria-selected="false" tabindex="-1">
+                <img src="assets/smok.jpg" loading="lazy" decoding="async" width="440" height="440" alt="">
+                <span>Smok</span>
+              </button>
+              <button id="blades-tab-goblin" type="button" role="tab" data-side="dark" aria-controls="blades-unit-goblin" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/dark-goblin.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Goblin</span>
+              </button>
+              <button id="blades-tab-manticore" type="button" role="tab" data-side="dark" aria-controls="blades-unit-manticore" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/dark-manticore.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Mantykora</span>
+              </button>
+              <button id="blades-tab-banshee" type="button" role="tab" data-side="dark" aria-controls="blades-unit-banshee" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/dark-banshee.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Banshee</span>
+              </button>
+              <button id="blades-tab-troll" type="button" role="tab" data-side="dark" aria-controls="blades-unit-troll" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/dark-troll.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Troll</span>
+              </button>
+              <button id="blades-tab-basilisk" type="button" role="tab" data-side="dark" aria-controls="blades-unit-basilisk" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/dark-basilisk.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Bazyliszek</span>
+              </button>
+              <button id="blades-tab-shapeshifter" type="button" role="tab" data-side="dark" aria-controls="blades-unit-shapeshifter" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/dark-shapeshifter.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Zmiennokształtny</span>
+              </button>
+              <button id="blades-tab-elemental-air" type="button" role="tab" data-side="elemental" aria-controls="blades-unit-elemental-air" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/elemental-air.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Żywiołak powietrza</span>
+              </button>
+              <button id="blades-tab-elemental-fire" type="button" role="tab" data-side="elemental" aria-controls="blades-unit-elemental-fire" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/elemental-fire.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Żywiołak ognia</span>
+              </button>
+              <button id="blades-tab-elemental-earth" type="button" role="tab" data-side="elemental" aria-controls="blades-unit-elemental-earth" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/elemental-earth.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Żywiołak ziemi</span>
+              </button>
+              <button id="blades-tab-elemental-water" type="button" role="tab" data-side="elemental" aria-controls="blades-unit-elemental-water" aria-selected="false" tabindex="-1">
+                <img src="assets/figury/elemental-water.jpg" loading="lazy" decoding="async" width="320" height="320" alt="">
+                <span>Żywiołak wody</span>
+              </button>
+            </div>
+            <button class="roster-step" type="button" data-roster-step="1" aria-label="Następna postać" aria-controls="blades-roster-track"></button>
+          </div>
+          <p class="roster-status" role="status"></p>
+
+          <article id="blades-unit-valkyrie" class="roster-portrait" data-side="light" role="tabpanel" aria-labelledby="blades-tab-valkyrie" tabindex="0">
+            <img class="roster-portrait__art" src="assets/walkiria-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Walkiria w złotej zbroi ze skrzydlatym diademem i włócznią">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Światłość · Lot</p>
+              <h3>Walkiria</h3>
+              <p>Przelatuje nad figurami na planszy. Na arenie miota złotą włócznią i może trzymać wroga na dystans.</p>
+            </div>
+          </article>
+          <article id="blades-unit-knight" class="roster-portrait" data-side="light" role="tabpanel" aria-labelledby="blades-tab-knight" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/light-knight-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Rycerz w złotej zbroi i hełmie z pióropuszem">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Światłość · Ruch naziemny</p>
+              <h3>Rycerz</h3>
+              <p>W pojedynku szybko wyprowadza kolejne cięcia. Na podejściu do zwarcia korzysta z osłony kryształów.</p>
+            </div>
+          </article>
+          <article id="blades-unit-archer" class="roster-portrait" data-side="light" role="tabpanel" aria-labelledby="blades-tab-archer" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/light-archer-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Łuczniczka z kołczanem i złotym łukiem">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Światłość · Ruch naziemny</p>
+              <h3>Łuczniczka</h3>
+              <p>Strzela srebrnymi strzałami. Ma mało zdrowia, więc w pojedynku liczy na osłony i dystans.</p>
+            </div>
+          </article>
+          <article id="blades-unit-wizard" class="roster-portrait" data-side="light" role="tabpanel" aria-labelledby="blades-tab-wizard" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/light-wizard-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Siwobrody Czarodziej w złotym kapeluszu">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Światłość · Teleportacja</p>
+              <h3>Czarodziej</h3>
+              <p>Teleportuje się po planszy i włada czarami Światłości. Zużyte zaklęcia zmniejszają jego zdrowie na arenie.</p>
+            </div>
+          </article>
+          <article id="blades-unit-golem" class="roster-portrait" data-side="light" role="tabpanel" aria-labelledby="blades-tab-golem" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/light-golem-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Kamienny Golem z motywem słońca na piersi">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Światłość · Ruch naziemny</p>
+              <h3>Golem</h3>
+              <p>Znosi wiele trafień. Rzuca ciężkim kamiennym odłamkiem i potrzebuje chwili przed kolejnym atakiem.</p>
+            </div>
+          </article>
+          <article id="blades-unit-unicorn" class="roster-portrait" data-side="light" role="tabpanel" aria-labelledby="blades-tab-unicorn" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/light-unicorn-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Biały Jednorożec ze złotym rogiem i uprzężą">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Światłość · Ruch naziemny</p>
+              <h3>Jednorożec</h3>
+              <p>Na planszy porusza się do czterech pól. Na arenie posyła szybki pryzmat wzdłuż wolnego przejścia.</p>
+            </div>
+          </article>
+          <article id="blades-unit-djinni" class="roster-portrait" data-side="light" role="tabpanel" aria-labelledby="blades-tab-djinni" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/light-djinni-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Białowłosy Dżinn wśród wirów powietrza">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Światłość · Lot</p>
+              <h3>Dżinn</h3>
+              <p>Przelatuje do czterech pól. W pojedynku miota spiralą wiatru i ma duży zapas zdrowia.</p>
+            </div>
+          </article>
+          <article id="blades-unit-phoenix" class="roster-portrait" data-side="light" role="tabpanel" aria-labelledby="blades-tab-phoenix" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/feniks-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Feniks z rozpostartymi złotymi skrzydłami pośród płomieni">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Światłość · Lot</p>
+              <h3>Feniks</h3>
+              <p>Zatrzymuje się, by wzniecić ognisty wybuch wokół siebie. W tej krótkiej chwili jest odporny na trafienia.</p>
+            </div>
+          </article>
+          <article id="blades-unit-sorceress" class="roster-portrait" data-side="dark" role="tabpanel" aria-labelledby="blades-tab-sorceress" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/czarodziejka-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Czarodziejka w granatowym stroju z berłem">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Ciemność · Teleportacja</p>
+              <h3>Czarodziejka</h3>
+              <p>Otwiera księgę czarów swojej strony. Może uzdrowić figurę albo przenieść ją w inne miejsce na planszy.</p>
+            </div>
+          </article>
+          <article id="blades-unit-dragon" class="roster-portrait" data-side="dark" role="tabpanel" aria-labelledby="blades-tab-dragon" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/smok-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Niebieski Smok o srebrzystych rogach na tle księżyca">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Ciemność · Lot</p>
+              <h3>Smok</h3>
+              <p>Przelatuje nad figurami, a na arenie atakuje smoczym żarem. Otwarta przestrzeń pozwala mu wykorzystać zasięg.</p>
+            </div>
+          </article>
+          <article id="blades-unit-goblin" class="roster-portrait" data-side="dark" role="tabpanel" aria-labelledby="blades-tab-goblin" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/dark-goblin-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Goblin z długimi uszami pod ciemnym kapturem">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Ciemność · Ruch naziemny</p>
+              <h3>Goblin</h3>
+              <p>Na arenie szuka okazji do szybkiego podejścia. Gdy jest blisko, zadaje serię ciosów poszarpanym ostrzem.</p>
+            </div>
+          </article>
+          <article id="blades-unit-manticore" class="roster-portrait" data-side="dark" role="tabpanel" aria-labelledby="blades-tab-manticore" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/dark-manticore-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Mantykora z lwią grzywą i ogonem skorpiona">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Ciemność · Ruch naziemny</p>
+              <h3>Mantykora</h3>
+              <p>Miota żądłem na odległość. Między atakami może zmienić pozycję i zasłonić się kryształem.</p>
+            </div>
+          </article>
+          <article id="blades-unit-banshee" class="roster-portrait" data-side="dark" role="tabpanel" aria-labelledby="blades-tab-banshee" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/dark-banshee-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Banshee o jasnych włosach pod srebrnym diademem">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Ciemność · Lot</p>
+              <h3>Banshee</h3>
+              <p>Widmowy krzyk rani wrogów wokół niej. Banshee stoi w miejscu, dopóki atak trwa.</p>
+            </div>
+          </article>
+          <article id="blades-unit-troll" class="roster-portrait" data-side="dark" role="tabpanel" aria-labelledby="blades-tab-troll" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/dark-troll-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Troll w zbroi z niebieską zapinką">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Ciemność · Ruch naziemny</p>
+              <h3>Troll</h3>
+              <p>Wytrzymuje wiele trafień i miota ciężkim odłamkiem granitu. Najgroźniejszy, gdy ma wolną linię strzału.</p>
+            </div>
+          </article>
+          <article id="blades-unit-basilisk" class="roster-portrait" data-side="dark" role="tabpanel" aria-labelledby="blades-tab-basilisk" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/dark-basilisk-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Łuskowaty Bazyliszek z zielonym okiem">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Ciemność · Ruch naziemny</p>
+              <h3>Bazyliszek</h3>
+              <p>Strzela szybkim, jadowitym kolcem. Na otwartej arenie trudno go ominąć, a pełne kryształy zatrzymują pocisk.</p>
+            </div>
+          </article>
+          <article id="blades-unit-shapeshifter" class="roster-portrait" data-side="dark" role="tabpanel" aria-labelledby="blades-tab-shapeshifter" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/dark-shapeshifter-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Zmiennokształtny z lustrzaną twarzą pod kapturem">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Ciemność · Lot</p>
+              <h3>Zmiennokształtny</h3>
+              <p>Przejmuje broń i bazową wytrzymałość przeciwnika. Po wygranej odzyskuje pełne zdrowie.</p>
+            </div>
+          </article>
+          <article id="blades-unit-elemental-air" class="roster-portrait" data-side="elemental" role="tabpanel" aria-labelledby="blades-tab-elemental-air" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/elemental-air-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Żywiołak powietrza o sylwetce z białych obłoków">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Przyzwanie · Prąd powietrza</p>
+              <h3>Żywiołak powietrza</h3>
+              <p>Posyła prąd powietrza i szybko wraca do ataku. Znika po zakończeniu pojedynku, do którego go przyzwano.</p>
+            </div>
+          </article>
+          <article id="blades-unit-elemental-fire" class="roster-portrait" data-side="elemental" role="tabpanel" aria-labelledby="blades-tab-elemental-fire" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/elemental-fire-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Żywiołak ognia wyłaniający się z pomarańczowych płomieni">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Przyzwanie · Żywy płomień</p>
+              <h3>Żywiołak ognia</h3>
+              <p>Miota szybkim płomieniem, który zadaje silne obrażenia. Ma najkrótszą przerwę między atakami wśród żywiołaków.</p>
+            </div>
+          </article>
+          <article id="blades-unit-elemental-earth" class="roster-portrait" data-side="elemental" role="tabpanel" aria-labelledby="blades-tab-elemental-earth" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/elemental-earth-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Żywiołak ziemi o ciele ze skał porośniętych mchem">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Przyzwanie · Ciężar ziemi</p>
+              <h3>Żywiołak ziemi</h3>
+              <p>Najwytrzymalszy z przyzwanych żywiołaków. Rzuca ciężkim pociskiem i długo czeka na kolejny strzał.</p>
+            </div>
+          </article>
+          <article id="blades-unit-elemental-water" class="roster-portrait" data-side="elemental" role="tabpanel" aria-labelledby="blades-tab-elemental-water" tabindex="0" hidden>
+            <img class="roster-portrait__art" src="assets/figury/elemental-water-864.jpg" loading="lazy" decoding="async" width="864" height="864" alt="Żywiołak wody wyłaniający się z błękitnych fal">
+            <div class="roster-portrait__copy">
+              <p class="eyebrow">Przyzwanie · Wodna fala</p>
+              <h3>Żywiołak wody</h3>
+              <p>Atakuje wodną falą na odległość. Duży zapas zdrowia pozwala mu przetrwać wymianę trafień.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="blades-trials" class="section trials" aria-labelledby="blades-trials-title">
+      <div class="shell">
+        <header class="trial-heading">
+          <h2 id="blades-trials-title">Próby</h2>
+          <p>Trzy scenariusze przeciw komputerowi z gotową pozycją i limitem ruchów.</p>
+        </header>
+
+        <div data-switch="trial">
+          <div class="text-tabs trial-tabs" role="tablist" aria-label="Scenariusze prób">
+            <button id="blades-trial-tab-solstice" type="button" role="tab" aria-controls="blades-trial-solstice" aria-selected="true">Przesilenie</button>
+            <button id="blades-trial-tab-gates" type="button" role="tab" aria-controls="blades-trial-gates" aria-selected="false" tabindex="-1">Dwie bramy</button>
+            <button id="blades-trial-tab-return" type="button" role="tab" aria-controls="blades-trial-return" aria-selected="false" tabindex="-1">Powrót czarodziejki</button>
+          </div>
+
+          <div class="trial-spread">
+            <div class="trial-scenes">
+              <article id="blades-trial-solstice" class="trial-scene" data-targets="E5" role="tabpanel" aria-labelledby="blades-trial-tab-solstice" tabindex="0">
+                <img src="assets/kingdom-light.jpg" width="1200" height="600" alt="" loading="lazy" decoding="async">
+                <div class="trial-scene__copy">
+                  <h3>Przesilenie</h3>
+                  <p>Odbij E5 w trzech swoich ruchach i utrzymaj je przez cztery kolejne tury obu stron. Światłość może raz odwrócić czas.</p>
+                </div>
+              </article>
+              <article id="blades-trial-gates" class="trial-scene" data-targets="E1 E9" role="tabpanel" aria-labelledby="blades-trial-tab-gates" tabindex="0" hidden>
+                <img src="assets/miedziany-most.jpg" width="1376" height="774" alt="" loading="lazy" decoding="async">
+                <div class="trial-scene__copy">
+                  <h3>Dwie bramy</h3>
+                  <p>Zajmij jednocześnie E1 i E9 w sześciu ruchach Ciemności.</p>
+                </div>
+              </article>
+              <article id="blades-trial-return" class="trial-scene" data-targets="I5" role="tabpanel" aria-labelledby="blades-trial-tab-return" tabindex="0" hidden>
+                <img src="assets/kingdom-dark.jpg" width="1200" height="600" alt="" loading="lazy" decoding="async">
+                <div class="trial-scene__copy">
+                  <h3>Powrót czarodziejki</h3>
+                  <p>Doprowadź ranną Czarodziejkę na I5 w pięciu ruchach. Ciemność może raz użyć Uzdrowienia.</p>
+                </div>
+              </article>
+            </div>
+
+            <figure class="trial-map">
+              <div class="tactical-board tactical-board--mission" data-board role="img" aria-label="Mapa prób. Cel obecnej próby to pole E5">
+                <div class="tactical-board__axis tactical-board__axis--files" data-axis="files" aria-hidden="true"></div>
+                <div class="tactical-board__axis tactical-board__axis--ranks" data-axis="ranks" aria-hidden="true"></div>
+                <div class="tactical-board__grid" data-cells aria-hidden="true"></div>
+              </div>
+              <figcaption class="trial-map__caption" aria-live="polite">Cel na planszy · E5</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <a class="site-brand" href="#blades-landing">
+        <img src="assets/blades-between-turns.png" alt="Blades Between Turns" width="238" height="85" loading="lazy">
+      </a>
+      <a class="footer__top" href="#blades-landing">Wróć na początek</a>
+    </div>
+  </footer>
+
+  <dialog class="capture-dialog" aria-label="Powiększony kadr z gry">
+    <form method="dialog">
+      <button class="text-action" autofocus>Zamknij</button>
+    </form>
+    <img src="assets/plansza-3d.jpg" loading="lazy" width="846" height="368" alt="">
+  </dialog>
+</body>
+</html>
