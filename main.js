@@ -1,4 +1,41 @@
 (() => {
+  const translations = {
+    pl: {
+      phaseNotes: {
+        dawn: 'Zmienne pola stopniowo się rozjaśniają.',
+        day: 'Zmienne pola osiągają najwyższą jasność.',
+        dusk: 'Zmienne pola ciemnieją wraz z upływem tur.',
+        night: 'Zmienne pola osiągają najniższą jasność.',
+      },
+      lightBoard: phase => `Plansza 9 na 9. ${phase}. 31 pól zmiennych i pięć punktów mocy.`,
+      rosterPosition: (name, position, count) => `${name}, ${position} z ${count}`,
+      trialCaption: targets => `Cel na planszy · ${targets.join(' · ')}`,
+      trialBoard: targets => `Pola celu próby ${targets.join(', ')}`,
+    },
+    en: {
+      phaseNotes: {
+        dawn: 'Shifting squares grow brighter.',
+        day: 'Shifting squares are at their brightest.',
+        dusk: 'Shifting squares darken with each turn.',
+        night: 'Shifting squares are at their darkest.',
+      },
+      lightBoard: phase => `9-by-9 board. ${phase}. 31 shifting squares and five power points.`,
+      rosterPosition: (name, position, count) => `${name}, ${position} of ${count}`,
+      trialCaption: targets => `Board objective · ${targets.join(' · ')}`,
+      trialBoard: targets => `Trial objective ${targets.join(', ')}`,
+    },
+  };
+  const copy = translations[document.documentElement.lang] ?? translations.pl;
+
+  const languageLinks = document.querySelectorAll('.language-nav a');
+
+  function updateLanguageLinks() {
+    for (const link of languageLinks) link.hash = location.hash;
+  }
+
+  updateLanguageLinks();
+  window.addEventListener('hashchange', updateLanguageLinks);
+
   // D, L i S odpowiadają układowi z Assets/Archon/Data/board.json.
   const boardRows = [
     'DLDSSSLDL',
@@ -98,7 +135,7 @@
         const nextIndex = (currentIndex + step + tabs.length) % tabs.length;
         const nextTab = tabs[nextIndex];
         selectTab(nextTab, nextIndex === currentIndex + step ? 'auto' : 'instant');
-        rosterStatus.textContent = `${nextTab.textContent.trim()}, ${nextIndex + 1} z ${tabs.length}`;
+        rosterStatus.textContent = copy.rosterPosition(nextTab.textContent.trim(), nextIndex + 1, tabs.length);
       });
     }
 
@@ -118,12 +155,6 @@
   const lightBoard = document.getElementById('blades-light-board');
   const phaseStatus = cycle.querySelector('.phase-status');
   const phaseButtons = [...cycle.querySelectorAll('[data-phase-choice]')];
-  const phaseNotes = {
-    dawn: 'Zmienne pola stopniowo się rozjaśniają.',
-    day: 'Zmienne pola osiągają najwyższą jasność.',
-    dusk: 'Zmienne pola ciemnieją wraz z upływem tur.',
-    night: 'Zmienne pola osiągają najniższą jasność.',
-  };
 
   drawBoard(lightBoard);
   for (const button of phaseButtons) {
@@ -132,8 +163,8 @@
       const name = button.textContent.trim();
       phaseButtons.forEach(option => option.setAttribute('aria-pressed', String(option === button)));
       cycle.dataset.phase = phase;
-      phaseStatus.textContent = name + ' · ' + phaseNotes[phase];
-      lightBoard.setAttribute('aria-label', 'Plansza 9 na 9. ' + name + '. 31 pól zmiennych i pięć punktów mocy.');
+      phaseStatus.textContent = name + ' · ' + copy.phaseNotes[phase];
+      lightBoard.setAttribute('aria-label', copy.lightBoard(name));
     });
   }
 
@@ -148,8 +179,8 @@
       tile.toggleAttribute('data-target', targets.includes(coordinate));
     }
 
-    trialCaption.textContent = 'Cel na planszy · ' + targets.join(' · ');
-    trialBoard.setAttribute('aria-label', 'Pola celu próby ' + targets.join(', '));
+    trialCaption.textContent = copy.trialCaption(targets);
+    trialBoard.setAttribute('aria-label', copy.trialBoard(targets));
   }
 
   showTrialTarget(trials.querySelector('.trial-scene:not([hidden])'));
